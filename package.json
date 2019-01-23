@@ -33,7 +33,7 @@
 	"contributes": {
 		"commands": [{
 			"command": "jbpm.jbavsc",
-			"title": "Generate jBPM Buisness Application"
+			"title": "Generate jBPM Business Application"
 		}]
 	},
 	"scripts": {
