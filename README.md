@@ -14,7 +14,7 @@ To generate your app via command-line use: [https://www.npmjs.com/package/jba-cl
 > Generate jBPM Business Application
 ```
 
-![Command Palette Generation](assets/commandPaletteGenerate.png)
+![Command Palette Generation](assets/cpGenerate.png)
 
 ## Generation Options
 
