@@ -1,7 +1,6 @@
 # jbavsc - jBoss Business Application Extension for Visual Studio Code
 
-Extension used to generate your jBPM Business Application in the
-current working directory.
+Visual Studio Code extension used to generate your jBPM Business Applications.
 
 To generate your app via Web use: [start.jbpm.org](start.jbpm.org).
 To generate your app via command-line use: [https://www.npmjs.com/package/jba-cli](https://www.npmjs.com/package/jba-cli).
