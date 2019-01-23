@@ -30,25 +30,25 @@ Selecting the configuration generation option will guide you though a number of 
 If you chose to configure your jBPM Business app you want to generate you
 will be guided through a 5 step process:
 
-1; Application type: Here you can pick what app type you want to generate. Options are "Business Automation", "Decision Management", and "Business Optimization".
+1. Application type: Here you can pick what app type you want to generate. Options are "Business Automation", "Decision Management", and "Business Optimization".
 
-![App Type Selection](assets/configStep1.png)
+![App Type Selection](assets/configstep1.png)
 
-2; Application name: Enter your application name here, or leave the default "business-application" entry.
+2. Application name: Enter your application name here, or leave the default "business-application" entry.
 
-![App Name Selection](assets/configStep2.png)
+![App Name Selection](assets/configstep2.png)
 
-3; Application package name: Enter your application package name here, or leave the default "com.company" entry.
+3. Application package name: Enter your application package name here, or leave the default "com.company" entry.
 
-![App Package Name Selection](assets/configStep3.png)
+![App Package Name Selection](assets/configstep3.png)
 
-4; Application KIE version: Pick from one of the KIE versions. If the version you want to use is not available (we will update the versions as we update this extension in the future) you can always change it in your generated application pom.xml files.
+4. Application KIE version: Pick from one of the KIE versions. If the version you want to use is not available (we will update the versions as we update this extension in the future) you can always change it in your generated application pom.xml files.
 
-![KIE Version Selection](assets/configStep4.png)
+![KIE Version Selection](assets/configstep4.png)
 
-5; Application components: Select one of the two availabe application components. If you would like to develop processes that use Case Management you should select the dynamic assets.
+5. Application components: Select one of the two availabe application components. If you would like to develop processes that use Case Management you should select the dynamic assets.
 
-![App Components Selection](assets/configStep5.png)
+![App Components Selection](assets/configstep5.png)
 
 ## Generated app in your working directory
 
