@@ -19,4 +19,8 @@ To generate your app via command-line use: [https://www.npmjs.com/package/jba-cl
 
 # Generation Options
 
-You can chose to either generate your application using default settings, or can customize it via configurations.
+You can chose to either generate your application using default settings, or can customize it via configurations:
+
+![Generation Options](assets/generationOptions.png)
+
+Selecting the configuration generation option will guide you though a number of steps and then generate your business application in the current working directory.
