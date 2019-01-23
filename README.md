@@ -1,4 +1,4 @@
-# jbavsc README
+# jbavsc README file
 
 This is the README for your extension "jbavsc". After writing up a brief description, we recommend including the following sections.
 
