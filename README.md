@@ -54,3 +54,25 @@ will be guided through a 5 step process:
 After the generation process this extension will generate your jBPM Business app zip file and also extract it into your current working directory. You will see the generated app modules:
 
 ![Generated App](assets/generatedApp.png)
+
+## Prerequisites
+
+1. npm and Node.js - [https://www.npmjs.com/get-npm](https://www.npmjs.com/get-npm)
+
+## Known Issues
+
+This extension tries to install the [jba-cli](https://www.npmjs.com/package/jba-cli) for you during generation.
+In the case you dont have direct user access on your machine to run
+
+```
+npm install
+```
+
+you will have to first run for example:
+
+```
+sudo npm install -g jba-cli
+```
+
+and provide your sudo password in order to install this package first. Then re-run the extension and
+your business application should be generated without issues.
