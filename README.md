@@ -101,7 +101,7 @@ To install vsce run:
 npm install -g vsce
 ```
 
-3. svce will create a jbavsc-$VERSION$.vsix file which you have to install to your ide, for this run:
+3. vsce will create a jbavsc-$VERSION$.vsix file which you have to install to your ide, for this run:
 
 ```
 code --install-extension jbavsc-$VERSION$.vsix
