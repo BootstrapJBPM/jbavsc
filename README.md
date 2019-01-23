@@ -62,10 +62,18 @@ After the generation process this extension will generate your jBPM Business app
 ## Known Issues
 
 This extension tries to install the [jba-cli](https://www.npmjs.com/package/jba-cli) npm package for you during generation.
-In the case you dont have direct user access on your machine to run
+In the case you dont have direct user access on your machine it can happen that your business application
+zip and modules do not get generated. In this case try to run with your current user:
 
 ```
 npm install
+```
+
+If you get a message saying for example:
+
+```
+Missing write access to /usr/lib/node_modules
+...
 ```
 
 you will have to first run for example:
