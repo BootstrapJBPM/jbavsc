@@ -76,3 +76,44 @@ sudo npm install -g jba-cli
 
 and provide your sudo password in order to install this package first. Then re-run the extension and
 your business application should be generated without issues.
+
+## Build and Install locally
+
+If you do not want to get this extension from the Marketplace or would like to build and test
+the latest changes/updates locally follow these steps:
+
+1. Clone the extension git repository
+
+```
+git clone https://github.com/BootstrapJBPM/jbavsc.git
+cd jbavsc
+```
+
+2. Build and package the extension with vsce:
+
+```
+vsce package
+```
+
+To install vsce run:
+
+```
+npm install -g vsce
+```
+
+3. svce will create a jbavsc-$VERSION$.vsix file which you have to install to your ide, for this run:
+
+```
+code --install-extension jbavsc-$VERSION$.vsix
+```
+
+to uninstall the extension run:
+
+```
+code --uninstall-extension jbavsc-$VERSION$.vsix
+```
+
+## Contributing
+
+We welcome all contributions and help to make this extension better. Before you start please read the [Developing Drools and jBPM](https://github.com/kiegroup/droolsjbpm-build-bootstrap/blob/master/README.md) guide.
+Best way to contribute is to create Pull Request(s) on the github project.
