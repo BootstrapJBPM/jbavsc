@@ -61,7 +61,7 @@ After the generation process this extension will generate your jBPM Business app
 
 ## Known Issues
 
-This extension tries to install the [jba-cli](https://www.npmjs.com/package/jba-cli) for you during generation.
+This extension tries to install the [jba-cli](https://www.npmjs.com/package/jba-cli) npm package for you during generation.
 In the case you dont have direct user access on your machine to run
 
 ```
