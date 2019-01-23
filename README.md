@@ -1,4 +1,4 @@
-# jbavsc
+# jbavsc - jBoss Business Application Extension for Visual Studio Code
 
 Extension used to generate your jBPM Business Application in the
 current working directory.
