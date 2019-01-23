@@ -2,7 +2,7 @@
 	"name": "jbavsc",
 	"displayName": "jbavsc",
 	"description": "Generate jBPM Business Application",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"engines": {
 		"vscode": "^1.30.0"
 	},
@@ -14,12 +14,10 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [
-			{
-				"command": "jbpm.jbavsc",
-				"title": "Generate jBPM Buisness Application"
-			}
-		]
+		"commands": [{
+			"command": "jbpm.jbavsc",
+			"title": "Generate jBPM Buisness Application"
+		}]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
@@ -34,5 +32,25 @@
 		"tslint": "^5.8.0",
 		"@types/node": "^8.10.25",
 		"@types/mocha": "^2.2.42"
+	},
+	"author": "Tihomir Surdilovic",
+	"license": "ASL-2.0",
+	"homepage": "https://github.com/BootstrapJBPM/jbavcs/blob/master/README.md",
+	"keywords": [
+		"jBPM",
+		"business",
+		"application",
+		"java"
+	],
+	"readmeFilename": "README.md",
+	"icon": "icon.png",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/BootstrapJBPM/jbavcs.git"
+	},
+	"dependencies": {
+		"typescript": "^3.1.4",
+		"vscode": "^1.1.25",
+		"tslint": "^5.8.0"
 	}
 }
