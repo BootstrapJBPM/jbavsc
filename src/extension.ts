@@ -19,6 +19,7 @@ export function activate(context: ExtensionContext) {
 				}
 			];
 			quickPick.items = items;
+			quickPick.title = "Select generation option";
 			quickPick.onDidChangeSelection(selection => {
 				if (selection[0]) {
 					if (selection[0].label === items[0].label) {
