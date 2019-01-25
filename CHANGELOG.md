@@ -6,8 +6,6 @@
 -   Fix issues with messages being displayed after app generation
 -   Updated README
 
-# Changelog
-
 ## 0.3.0 – 2018-01-25
 
 -   Fixed typos in Readme
