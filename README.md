@@ -1,4 +1,4 @@
-# jbavsc - jBoss Business Application Extension for Visual Studio Code
+# jbavsc - jBPM Business Application Extension for Visual Studio Code
 
 Visual Studio Code extension used to generate your jBPM Business Applications.
 
