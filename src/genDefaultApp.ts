@@ -1,14 +1,15 @@
 import { window, ExtensionContext } from "vscode";
 import { runDefaultApp } from "./genApp";
 
-export async function getDefaultApp(context: ExtensionContext) {
-	window.showInformationMessage("Generating...");
-	return await new Promise<string>((resolve, reject) => {
-		try {
-			runDefaultApp(context);
-			resolve("Successfully generated your jBPM Business Application");
-		} catch (e) {
-			reject(`Error generating your jBPM Business Application: ${e}`);
-		}
-	});
+export function getDefaultApp(context: ExtensionContext) {
+	try {
+		runDefaultApp(context);
+		window.showInformationMessage(
+			"Successfully generated your jBPM Business Application"
+		);
+	} catch (e) {
+		window.showInformationMessage(
+			`Error generating your jBPM Business Application: ${e}`
+		);
+	}
 }

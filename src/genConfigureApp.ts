@@ -11,8 +11,6 @@ import { runConfiguredApp } from "./genApp";
 import State from "./configState";
 
 export async function genConfigureApp(context: ExtensionContext) {
-	window.showInformationMessage("Configuring...");
-
 	const title = "Configure your jBPM Business App";
 
 	const appTypes: QuickPickItem[] = [
@@ -159,16 +157,32 @@ export async function genConfigureApp(context: ExtensionContext) {
 		return name.length < 1 ? "Invalid app name" : undefined;
 	}
 
+	function confirmConfigGen(context: ExtensionContext) {
+		window
+			.showInformationMessage(
+				"About to generate your app. Please confirm.",
+				{ modal: true },
+				"Do it!"
+			)
+			.then(answer => {
+				if (answer === "Do it!") {
+					try {
+						runConfiguredApp(context, confState);
+						window.showInformationMessage(
+							"Successfully generated your jBPM Business Application"
+						);
+					} catch (e) {
+						window.showInformationMessage(
+							`Error generating your jBPM Business Application: ${e}`
+						);
+					}
+				}
+			});
+	}
+
 	const confState = await collectInputs();
 
-	return await new Promise<string>((resolve, reject) => {
-		try {
-			runConfiguredApp(context, confState);
-			resolve("Successfully generated your jBPM Business Application");
-		} catch (e) {
-			reject(`Error generating your jBPM Business Application: ${e}`);
-		}
-	});
+	confirmConfigGen(context);
 }
 
 // -------------------------------------------------------
