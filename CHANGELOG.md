@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 – 2018-01-25
+
+-   Adding confirmation dialog for generation
+-   Fix issues with messages being displayed after app generation
+-   Updated README
+
+# Changelog
+
 ## 0.3.0 – 2018-01-25
 
 -   Fixed typos in Readme

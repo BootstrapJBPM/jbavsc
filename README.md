@@ -22,6 +22,10 @@ You can chose to either generate your application using default settings, or can
 
 ![Generation Options](assets/generationOptions.png)
 
+After your selection and before the app gets generated you will be presented with a confirmation dialog:
+
+![Confirmation Dialog](assets/confirmdialog.png)
+
 Selecting the configuration generation option will guide you though a number of steps and then generate your business application in the current working directory.
 
 ## App generation via Configuration

@@ -23,22 +23,10 @@ export function activate(context: ExtensionContext) {
 			quickPick.onDidChangeSelection(selection => {
 				if (selection[0]) {
 					if (selection[0].label === items[0].label) {
-						getDefaultApp(context)
-							.then(message => {
-								window.showInformationMessage(`${message}`);
-							})
-							.catch(err => {
-								window.showInformationMessage(`Error: ${err}`);
-							});
 						quickPick.dispose();
+						confirmDefaultGen(context);
 					} else if (selection[0].label === items[1].label) {
-						genConfigureApp(context)
-							.then(message => {
-								window.showInformationMessage(`${message}`);
-							})
-							.catch(err => {
-								window.showInformationMessage(`Error: ${err}`);
-							});
+						genConfigureApp(context);
 					} else {
 						window.showInformationMessage(
 							`Invalid command ${selection[0]}`
@@ -50,4 +38,18 @@ export function activate(context: ExtensionContext) {
 			quickPick.show();
 		})
 	);
+}
+
+function confirmDefaultGen(context: ExtensionContext) {
+	window
+		.showInformationMessage(
+			"About to generate your app. Please confirm.",
+			{ modal: true },
+			"Do it!"
+		)
+		.then(answer => {
+			if (answer === "Do it!") {
+				getDefaultApp(context);
+			}
+		});
 }
