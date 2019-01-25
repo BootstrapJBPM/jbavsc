@@ -20,7 +20,7 @@ export async function runDefaultApp(context: ExtensionContext) {
 	return await new Promise<string>((resolve, reject) => {
 		try {
 			commands.forEach(async cmd => {
-				await exec(cmd, { cwd: workspaceRoot });
+				exec(cmd, { cwd: workspaceRoot });
 			});
 			resolve("done");
 		} catch (e) {
@@ -92,18 +92,6 @@ export async function runConfiguredApp(
 	});
 }
 
-function exec(
-	command: string,
-	options: cp.ExecOptions
-): Promise<{ stdout: string; stderr: string }> {
-	return new Promise<{ stdout: string; stderr: string }>(
-		(resolve, reject) => {
-			cp.exec(command, options, (error, stdout, stderr) => {
-				if (error) {
-					reject({ error, stdout, stderr });
-				}
-				resolve({ stdout, stderr });
-			});
-		}
-	);
+function exec(command: string, options: cp.ExecOptions) {
+	cp.execSync(command, options);
 }
