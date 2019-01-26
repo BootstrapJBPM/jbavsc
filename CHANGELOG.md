@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.0 – 2018-01-26
+
+-   Removed the need to have npm installed on machine
+-   declaring jba-cli as dependency in package.json and using its functions directly
+-   Updated README
+
 ## 0.4.0 – 2018-01-25
 
 -   Adding confirmation dialog for generation

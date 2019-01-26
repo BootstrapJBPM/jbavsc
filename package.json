@@ -5,7 +5,7 @@
 	"description": "Generate jBPM Business Application",
 	"version": "0.4.0",
 	"author": "Tihomir Surdilovic",
-	"license": "ASL-2.0",
+	"license": "Apache-2.0",
 	"homepage": "https://github.com/BootstrapJBPM/jbavcs/blob/master/README.md",
 	"readmeFilename": "README.md",
 	"icon": "icon.png",
@@ -48,11 +48,13 @@
 		"vscode": "^1.1.25",
 		"tslint": "^5.8.0",
 		"@types/node": "^8.10.25",
-		"@types/mocha": "^2.2.42"
+		"@types/mocha": "^2.2.42",
+		"jba-cli": "^1.0.13"
 	},
 	"dependencies": {
 		"typescript": "^3.1.4",
 		"vscode": "^1.1.25",
-		"tslint": "^5.8.0"
+		"tslint": "^5.8.0",
+		"jba-cli": "^1.0.13"
 	}
 }

@@ -5,10 +5,6 @@ Visual Studio Code extension used to generate your jBPM Business Applications.
 To generate your app via Web use: [start.jbpm.org](start.jbpm.org).
 To generate your app via command-line use: [https://www.npmjs.com/package/jba-cli](https://www.npmjs.com/package/jba-cli).
 
-## Prerequisites
-
-1. npm and Node.js - [https://www.npmjs.com/get-npm](https://www.npmjs.com/get-npm)
-
 ## How to use
 
 1. Make sure you are in a workspace (directory) where you would like to generate your jBPM Business Application.
@@ -62,32 +58,6 @@ will be guided through a 5 step process:
 After the generation process this extension will generate your jBPM Business app zip file and also extract it into your current working directory. You will see the generated app modules:
 
 ![Generated App](assets/generatedApp.png)
-
-## Known Issues
-
-This extension tries to install the [jba-cli](https://www.npmjs.com/package/jba-cli) npm package for you during generation.
-In the case you dont have direct user access on your machine it can happen that your business application
-zip and modules do not get generated. In this case try to run with your current user:
-
-```
-npm install
-```
-
-If you get a message saying for example:
-
-```
-Missing write access to /usr/lib/node_modules
-...
-```
-
-you will have to first run for example:
-
-```
-sudo npm install -g jba-cli
-```
-
-and provide your sudo password in order to install this package first. Then re-run the extension and
-your business application should be generated without issues.
 
 ## Build and Install locally
 
