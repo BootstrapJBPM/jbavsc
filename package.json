@@ -3,7 +3,7 @@
 	"publisher": "tsurdilovic",
 	"displayName": "jBPM Business Application",
 	"description": "Generate jBPM Business Application",
-	"version": "0.4.0",
+	"version": "0.5.0",
 	"author": "Tihomir Surdilovic",
 	"license": "Apache-2.0",
 	"homepage": "https://github.com/BootstrapJBPM/jbavcs/blob/master/README.md",
@@ -31,10 +31,12 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [{
-			"command": "jbpm.jbavsc",
-			"title": "Generate jBPM Business Application"
-		}]
+		"commands": [
+			{
+				"command": "jbpm.jbavsc",
+				"title": "Generate jBPM Business Application"
+			}
+		]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
