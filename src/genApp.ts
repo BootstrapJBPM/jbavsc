@@ -20,7 +20,10 @@ export async function runDefaultApp(context: ExtensionContext) {
 	return await new Promise<string>((resolve, reject) => {
 		try {
 			commands.forEach(async cmd => {
-				exec(cmd, { cwd: workspaceRoot });
+				exec(cmd, {
+					cwd: workspaceRoot,
+					stdio: "inherit"
+				});
 			});
 			resolve("done");
 		} catch (e) {
@@ -84,7 +87,8 @@ export async function runConfiguredApp(
 		try {
 			commands.forEach(async cmd => {
 				await exec(cmd, {
-					cwd: workspaceRoot
+					cwd: workspaceRoot,
+					stdio: "inherit"
 				});
 			});
 			resolve("done");
@@ -94,6 +98,7 @@ export async function runConfiguredApp(
 	});
 }
 
-function exec(command: string, options: cp.ExecOptions) {
+function exec(command: string, options: cp.ExecSyncOptions) {
+	console.log(`Executing command: ${command}`);
 	cp.execSync(command, options);
 }
