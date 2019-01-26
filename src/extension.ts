@@ -1,8 +1,9 @@
 "use strict";
 
 import { window, commands, ExtensionContext, QuickPickItem } from "vscode";
-import { getDefaultApp } from "./genDefaultApp";
+import { runDefaultApp } from "./genApp";
 import { genConfigureApp } from "./genConfigureApp";
+import { confirmAndGen } from "./confirmAndGen";
 
 export function activate(context: ExtensionContext) {
 	context.subscriptions.push(
@@ -24,7 +25,7 @@ export function activate(context: ExtensionContext) {
 				if (selection[0]) {
 					if (selection[0].label === items[0].label) {
 						quickPick.dispose();
-						confirmDefaultGen(context);
+						confirmAndGen(runDefaultApp, context);
 					} else if (selection[0].label === items[1].label) {
 						genConfigureApp(context);
 					} else {
@@ -38,18 +39,4 @@ export function activate(context: ExtensionContext) {
 			quickPick.show();
 		})
 	);
-}
-
-function confirmDefaultGen(context: ExtensionContext) {
-	window
-		.showInformationMessage(
-			"About to generate your app. Please confirm.",
-			{ modal: true },
-			"Do it!"
-		)
-		.then(answer => {
-			if (answer === "Do it!") {
-				getDefaultApp(context);
-			}
-		});
 }

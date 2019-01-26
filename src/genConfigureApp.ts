@@ -9,6 +9,7 @@ import {
 } from "vscode";
 import { runConfiguredApp } from "./genApp";
 import State from "./configState";
+import { confirmAndGen } from "./confirmAndGen";
 
 export async function genConfigureApp(context: ExtensionContext) {
 	const title = "Configure your jBPM Business App";
@@ -157,32 +158,8 @@ export async function genConfigureApp(context: ExtensionContext) {
 		return name.length < 1 ? "Invalid app name" : undefined;
 	}
 
-	function confirmConfigGen(context: ExtensionContext) {
-		window
-			.showInformationMessage(
-				"About to generate your app. Please confirm.",
-				{ modal: true },
-				"Do it!"
-			)
-			.then(answer => {
-				if (answer === "Do it!") {
-					try {
-						runConfiguredApp(context, confState);
-						window.showInformationMessage(
-							"Successfully generated your jBPM Business Application"
-						);
-					} catch (e) {
-						window.showInformationMessage(
-							`Error generating your jBPM Business Application: ${e}`
-						);
-					}
-				}
-			});
-	}
-
 	const confState = await collectInputs();
-
-	confirmConfigGen(context);
+	confirmAndGen(runConfiguredApp, context, confState);
 }
 
 // -------------------------------------------------------

@@ -83,7 +83,9 @@ export async function runConfiguredApp(
 	return await new Promise<string>((resolve, reject) => {
 		try {
 			commands.forEach(async cmd => {
-				await exec(cmd, { cwd: workspaceRoot });
+				await exec(cmd, {
+					cwd: workspaceRoot
+				});
 			});
 			resolve("done");
 		} catch (e) {
