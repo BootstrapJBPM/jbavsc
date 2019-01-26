@@ -5,6 +5,10 @@ Visual Studio Code extension used to generate your jBPM Business Applications.
 To generate your app via Web use: [start.jbpm.org](start.jbpm.org).
 To generate your app via command-line use: [https://www.npmjs.com/package/jba-cli](https://www.npmjs.com/package/jba-cli).
 
+## Prerequisites
+
+1. npm and Node.js - [https://www.npmjs.com/get-npm](https://www.npmjs.com/get-npm)
+
 ## How to use
 
 1. Make sure you are in a workspace (directory) where you would like to generate your jBPM Business Application.
@@ -58,10 +62,6 @@ will be guided through a 5 step process:
 After the generation process this extension will generate your jBPM Business app zip file and also extract it into your current working directory. You will see the generated app modules:
 
 ![Generated App](assets/generatedApp.png)
-
-## Prerequisites
-
-1. npm and Node.js - [https://www.npmjs.com/get-npm](https://www.npmjs.com/get-npm)
 
 ## Known Issues
 

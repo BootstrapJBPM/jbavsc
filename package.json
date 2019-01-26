@@ -31,12 +31,10 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [
-			{
-				"command": "jbpm.jbavsc",
-				"title": "Generate jBPM Business Application"
-			}
-		]
+		"commands": [{
+			"command": "jbpm.jbavsc",
+			"title": "Generate jBPM Business Application"
+		}]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
