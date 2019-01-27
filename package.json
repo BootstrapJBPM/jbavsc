@@ -27,14 +27,18 @@
 		"java"
 	],
 	"activationEvents": [
-		"onCommand:jbpm.jbavsc"
+		"onCommand:jbpm.jbavsc",
+		"onCommand:jbpm.jbavsc.monitor"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [
-			{
+		"commands": [{
 				"command": "jbpm.jbavsc",
 				"title": "Generate jBPM Business Application"
+			},
+			{
+				"command": "jbpm.jbavsc.monitor",
+				"title": "Monitor your jBPM Business Application"
 			}
 		]
 	},

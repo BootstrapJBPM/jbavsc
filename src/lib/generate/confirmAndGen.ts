@@ -10,7 +10,7 @@ export function confirmAndGen(
 		.showInformationMessage(
 			"About to generate your app. Please confirm.",
 			{ modal: true },
-			"Do it!"
+			"Yes, generate!"
 		)
 		.then(answer => {
 			if (answer === "Do it!") {
