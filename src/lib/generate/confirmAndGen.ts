@@ -13,7 +13,7 @@ export function confirmAndGen(
 			"Yes, generate!"
 		)
 		.then(answer => {
-			if (answer === "Do it!") {
+			if (answer === "Yes, generate!") {
 				try {
 					if (confState) {
 						genFunction(context, confState);

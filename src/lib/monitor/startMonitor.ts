@@ -1,6 +1,7 @@
 import { window, ExtensionContext } from "vscode";
 import AppState from "./appState";
 import MultiStepInput from "../shared/multistep";
+import { createMonitorPanel } from "./monitorPanel";
 
 export async function startMonitor(context: ExtensionContext) {
 	window.showInformationMessage("About to monitor a business app!");
@@ -25,7 +26,7 @@ export async function startMonitor(context: ExtensionContext) {
 				typeof appState.url === "string"
 					? appState.url
 					: "http://localhost:8090",
-			prompt: "Enter app URL",
+			prompt: "Enter app rest URL",
 			validate: validateInput,
 			shouldResume: shouldResume
 		});
@@ -41,7 +42,9 @@ export async function startMonitor(context: ExtensionContext) {
 			step: 2,
 			totalSteps: 3,
 			value:
-				typeof appState.username === "string" ? appState.username : "",
+				typeof appState.username === "string"
+					? appState.username
+					: "user",
 			prompt: "Auth username (leave blank if no auth configured)",
 			validate: validateInput,
 			shouldResume: shouldResume
@@ -58,7 +61,9 @@ export async function startMonitor(context: ExtensionContext) {
 			step: 3,
 			totalSteps: 3,
 			value:
-				typeof appState.password === "string" ? appState.password : "",
+				typeof appState.password === "string"
+					? appState.password
+					: "user",
 			prompt: "Auth password (leave blank if no auth configured)",
 			validate: validateInput,
 			shouldResume: shouldResume
@@ -71,7 +76,7 @@ export async function startMonitor(context: ExtensionContext) {
 
 	async function validateInput(name: string) {
 		await new Promise(resolve => setTimeout(resolve, 1000));
-		return name.length < 1 ? "Invalid Input" : undefined;
+		return name.length < 0 ? "Invalid Input" : undefined;
 	}
 
 	const appState = await collectInputs();
@@ -81,4 +86,10 @@ export async function startMonitor(context: ExtensionContext) {
 			appState.password
 		}`
 	);
+
+	// make sure appState url ends with slash
+	if (!appState.url.endsWith("/")) {
+		appState.url = appState.url + "/";
+	}
+	createMonitorPanel(context, appState);
 }
