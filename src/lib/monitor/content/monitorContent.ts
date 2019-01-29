@@ -1,6 +1,7 @@
 import { ExtensionContext } from "vscode";
 import AppState from "../appState";
 import { getServerInfoContent } from "./serverInfoContent";
+import { getServerContainersContent } from "./containersInfoContent";
 import { getProcessInstanceContent } from "./processInstancesContent";
 import { getProcessDefsContent } from "./processDefsContent";
 import { getLeftNav } from "./leftNav";
@@ -23,6 +24,7 @@ export function getMonitorContent(
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
 </head>
 <body>
 
@@ -47,6 +49,8 @@ export function getMonitorContent(
             </div>
             <br/>
             ${getServerInfoContent(context, appState, media)}
+            <br/>
+            ${getServerContainersContent(context, appState, media)}
             <br/>
             ${getProcessDefsContent(context, appState, media)}
             <br/>
