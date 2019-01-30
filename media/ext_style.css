@@ -8,9 +8,7 @@ body {
     bottom: 0;
     left: 0;
     z-index: 100;
-    /* Behind the navbar */
     padding: 48px 0 0;
-    /* Height of navbar */
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
 }
 
@@ -97,4 +95,29 @@ body {
 
 .card-header .collapsed .fa {
     transform: rotate(90deg);
+}
+
+.modal-dialog,
+.modal-content {
+    height: 80%;
+}
+
+.modal-body {
+    max-height: calc(100% - 120px);
+    overflow-y: scroll;
+}
+
+.iframe-container {
+    overflow: hidden;
+    padding-top: 56.25%;
+    position: relative;
+}
+
+.iframe-container iframe {
+    border: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
 }

@@ -34,6 +34,21 @@ export async function createMonitorPanel(
 		appState,
 		media
 	);
+
+	createMonitorPanel.webview.onDidReceiveMessage(
+		message => {
+			switch (message.command) {
+				case "info":
+					window.showInformationMessage(message.text);
+					return;
+				case "alert":
+					window.showErrorMessage(message.text);
+					return;
+			}
+		},
+		undefined,
+		context.subscriptions
+	);
 }
 
 function getMediaUri(context: ExtensionContext, mediaName: string): string {

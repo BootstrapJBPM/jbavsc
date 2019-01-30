@@ -11,7 +11,7 @@ export function getServerInfoContent(
         <h5 class="card-header">
             <a data-toggle="collapse" href="#collapse-serverinfo" aria-expanded="true" aria-controls="collapse-serverinfo" id="heading-serverinfo" class="d-block">
                 <i class="fa fa-chevron-down pull-right"></i>
-                <i class="fa fa-file"></i>&nbsp;App Server Info
+                <i class="fa fa-file"></i>&nbsp;Server Info
             </a>
         </h5>
         <div id="collapse-serverinfo" class="collapse show" aria-labelledby="heading-serverinfo">

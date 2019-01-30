@@ -10,22 +10,31 @@ export function getLeftNav(
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                  <span>
-                    &nbsp;&nbsp;<i class="fa fa-info-circle"></i>&nbsp;
-                    <a href="#serverinfodiv" class="appnavlink"><strong>App Server Info</strong></a>
-                  </span>
+                <a class="nav-link" href="#serverinfodiv">
+                  <span><i class="fa fa-info-circle"></i></span>
+                  <strong>Server Info</strong>
+                </a>
               </li>
+              <br/>
               <li class="nav-item">
-                  <span>
-                    &nbsp;&nbsp;<i class="fa fa-file"></i>&nbsp;
-                    <a href="#processdefsdiv" class="appnavlink"><strong>Process Defs</strong></a>
-                  </span>
+                <a class="nav-link" href="#servercontainersdiv">
+                  <span><i class="fa fa-th"></i></span>
+                 <strong>Containers Info</strong>
+                </a>
               </li>
+              <br/>
               <li class="nav-item">
-                  <span>
-                    &nbsp;&nbsp;<i class="fa fa-cog"></i></i>&nbsp;
-                    <a href="#processinstancesdiv" class="appnavlink"><strong>Process Instances</strong></a>
-                  </span>
+                <a class="nav-link" href="#processdefsdiv">
+                  <span><i class="fa fa-file"></i></span>
+                 <strong>Process Definitions</strong>
+                </a>
+              </li>
+              <br/>
+              <li class="nav-item">
+                <a class="nav-link" href="#processinstdiv">
+                  <span><i class="fa fa-cog"></i></span>
+                 <strong>Active Processes</strong>
+                </a>
               </li>
             </ul>
           </div>

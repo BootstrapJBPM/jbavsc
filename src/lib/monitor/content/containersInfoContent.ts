@@ -11,7 +11,7 @@ export function getServerContainersContent(
         <h5 class="card-header">
             <a data-toggle="collapse" href="#collapse-servercontainers" aria-expanded="true" aria-controls="collapse-serverinfo" id="heading-servercontainers" class="d-block">
                 <i class="fa fa-chevron-down pull-right"></i>
-                <i class="fa fa-th"></i>&nbsp;Server Containers Info
+                <i class="fa fa-th"></i>&nbsp;Containers Info
             </a>
         </h5>
         <div id="collapse-servercontainers" class="collapse show" aria-labelledby="heading-servercontainers">
@@ -38,14 +38,12 @@ export function getServerContainersContent(
     <script id="containersinfo-template" type="text/x-handlebars-template">
         {{#each this}}
             <tr>
-            <th scope="row"><small>{{ inc @index }}</small></th>
-            <td><small>{{ container-id }}</small></td>
-            <td><small>{{ container-alias }}</small></td>
-            <td><small>{{ config-items.[3].itemValue }}</small></td>
-            <td><small>{{ status }}</small></td>
-        </tr>
+                <th scope="row"><small>{{ inc @index }}</small></th>
+                <td><small>{{ container-id }}</small></td>
+                <td><small>{{ container-alias }}</small></td>
+                <td><small>{{ config-items.[3].itemValue }}</small></td>
+                <td><small>{{ status }}</small></td>
+            </tr>
         {{/each}}
-    </script>
-    
-    `;
+    </script>`;
 }
