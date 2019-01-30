@@ -69,7 +69,7 @@ export function getProcessDefsContent(
             </div>
         </div>
     </div>
-
+    
     <script id="processdefsinfo-template" type="text/x-handlebars-template">
         {{#each this}}
             <tr>

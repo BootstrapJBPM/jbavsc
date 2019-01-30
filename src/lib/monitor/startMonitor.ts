@@ -4,8 +4,6 @@ import MultiStepInput from "../shared/multistep";
 import { createMonitorPanel } from "./monitorPanel";
 
 export async function startMonitor(context: ExtensionContext) {
-	window.showInformationMessage("About to monitor a business app!");
-
 	const title = "Monitor your jBPM Business App";
 
 	async function collectInputs() {
@@ -80,12 +78,6 @@ export async function startMonitor(context: ExtensionContext) {
 	}
 
 	const appState = await collectInputs();
-
-	window.showInformationMessage(
-		`Url: ${appState.url} Name: ${appState.username} Pass: ${
-			appState.password
-		}`
-	);
 
 	// make sure appState url ends with slash
 	if (!appState.url.endsWith("/")) {

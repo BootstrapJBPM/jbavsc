@@ -23,6 +23,15 @@ export function addScripts(
                 $('html,body').animate({scrollTop: $(aid).offset().top},'slow');
             });
 
+            // refresh info when modals are hidden
+            $("#startprocessmodal").on("hide.bs.modal", function () {
+                getMonitoringData();
+            });
+
+            $("#workontaskmodal").on("hide.bs.modal", function () {
+                getMonitoringData();
+            });
+
             // first check if app is running
             checkAppIsRunning("${appState.url}rest/server", function(running) {
                 if(running) {
@@ -207,7 +216,6 @@ export function addScripts(
                                             if(data) {
                                                 updatedInst.push(data.responseJSON);
 
-
                                                 var processinstTemplateSource = document.getElementById("processinstinfo-template").innerHTML;
                                                 var processinstTemplate = Handlebars.compile(processinstTemplateSource);   
                                                 $('#processinstinfotable tbody').html(processinstTemplate(updatedInst));
@@ -227,10 +235,10 @@ export function addScripts(
 
                                     });
                                 } else {
-                                    vscode.postMessage({
-                                        command: 'info',
-                                        text: "No Active processes found"
-                                    });
+                                    // still gotta update with empty data, in case there was before
+                                    var processinstTemplateSource = document.getElementById("processinstinfo-template").innerHTML;
+                                    var processinstTemplate = Handlebars.compile(processinstTemplateSource);   
+                                    $('#processinstinfotable tbody').html(processinstTemplate([]));
                                 }
                             }
                         });
