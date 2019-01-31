@@ -124,9 +124,22 @@ export function addScripts(
 				appState.url
 			}rest/server/containers/" + cid + "/processes/instances/" + pid + "/variables", function(data) {
                 if(data) {
+                    var customData = {};
+                    customData.pid = pid;
+                    customData.cid = cid;
+                    customData.vars = data.responseJSON;
+
                     var processinstvarsTemplateSource = document.getElementById("processinstvarsinfo-template").innerHTML;
                     var processinstvarsTemplate = Handlebars.compile(processinstvarsTemplateSource);   
-                    $('#processinstvarsinfotable tbody').html(processinstvarsTemplate(data.responseJSON));
+                    $('#processinstvarsinfotable tbody').html(processinstvarsTemplate(customData));
+
+                    // make variables table editable
+                    editor = new SimpleTableCellEditor("processinstvarsinfotable");
+                    editor.SetEditableClass("editPVar");
+
+                    $('#processinstvarsinfotable').on("cell:edited", function (event) {
+                        updateProcessVarValue(event.element.dataset.vname, event.element.dataset.pid, event.element.dataset.cid, event.newValue);
+                    });
                 }
             });
 
@@ -166,6 +179,14 @@ export function addScripts(
                     getMonitoringData();
             }, 'PUT');
         }
+
+        function updateProcessVarValue(varname, pid, cid, newvalue) {
+            vscode.postMessage({
+                command: 'alert',
+                text:  "VarName: " + varname + " PID: " + pid + " CID: " + cid + " New Value: " + newvalue
+            });
+        }
+                        
 
         // main function to retrieve data
         function getMonitoringData() {
@@ -281,6 +302,7 @@ export function addScripts(
                                                 $("button[id^='ptask-start']").click(function() {
                                                     workOnActiveTask($(this).data('tid'), $(this).data('cid'));
                                                 });
+
                                             }
                                         });
 

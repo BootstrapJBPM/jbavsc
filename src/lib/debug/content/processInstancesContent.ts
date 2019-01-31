@@ -67,7 +67,7 @@ export function getProcessInstanceContent(
                                                     <tr>
                                                     <th scope="col">#</th>
                                                     <th scope="col">Name</th>
-                                                    <th scope="col">Value</th>
+                                                    <th scope="col">Value (click cell to edit)</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -124,11 +124,11 @@ export function getProcessInstanceContent(
     </script>
     
     <script id="processinstvarsinfo-template" type="text/x-handlebars-template">
-        {{#each this}}
+        {{#each vars}}
             <tr>
                 <th scope="row">{{ inc @index }}</th>
                 <td>{{ @key }}</td>
-                <td>{{ this }}</td>
+                <td class="editPVar" data-vname="{{ @key }}" data-pid="{{ @root.pid }}" data-cid="{{ @root.cid }}">{{ this }}</td>
             </tr>
         {{/each}}
     </script>`;

@@ -18,7 +18,8 @@ export async function createDebugPanel(
 
 	const media = {
 		extlogo: getMediaUri(context, "ext_logo.png"),
-		extcss: getMediaUri(context, "ext_style.css")
+		extcss: getMediaUri(context, "ext_style.css"),
+		celleditorjs: getMediaUri(context, "SimpleTableCellEditor.js")
 	};
 
 	createDebugPanel.onDidDispose(
