@@ -4,6 +4,7 @@ import { getServerInfoContent } from "./serverInfoContent";
 import { getServerContainersContent } from "./containersInfoContent";
 import { getProcessInstanceContent } from "./processInstancesContent";
 import { getProcessDefsContent } from "./processDefsContent";
+import { getProcessErrorsContent } from "./processErrorsContent";
 import { getLeftNav } from "./leftNav";
 import { addScripts } from "./scripts";
 
@@ -57,6 +58,7 @@ export function getDebugContent(
             <br/>
             ${getProcessInstanceContent(context, appState, media)}
             <br/>
+            ${getProcessErrorsContent(context, appState, media)}       
         </main>
       </div>
 </div>

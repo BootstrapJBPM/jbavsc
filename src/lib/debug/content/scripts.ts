@@ -159,6 +159,14 @@ export function addScripts(
              $('#workontaskmodal').modal('show');
         }
 
+        function ackProcessError(cid, eid) {
+            appRestGetCall("${
+				appState.url
+			}rest/server/admin/containers/" + cid + "/processes/errors/" + eid, function(data) {
+                    getMonitoringData();
+            }, 'PUT');
+        }
+
         // main function to retrieve data
         function getMonitoringData() {
             // get server info
@@ -282,9 +290,33 @@ export function addScripts(
                                     var processinstTemplateSource = document.getElementById("processinstinfo-template").innerHTML;
                                     var processinstTemplate = Handlebars.compile(processinstTemplateSource);   
                                     $('#processinstinfotable tbody').html(processinstTemplate([]));
+
                                 }
                             }
                         });
+
+                        // get processing errors
+                        appRestGetCall("${
+							appState.url
+						}rest/server/admin/containers/" + container["container-id"] + "/processes/errors", function(data) {
+                            if(data) {
+                                var processerrorsTemplateSource = document.getElementById("processerrorsinfo-template").innerHTML;
+                                var processerrorsTemplate = Handlebars.compile(processerrorsTemplateSource);   
+                                $('#processerrorsinfotable tbody').html(processerrorsTemplate(data.responseJSON["error-instance"]));
+
+                                // event handlers have to reattach after handlebars updates dom
+                                // process error ack
+                                $("button[id^='perror-ack']").click(function() {
+                                    ackProcessError($(this).data('cid'), $(this).data('errorid'));
+                                });
+                            } else {
+                                // still gotta update with empty data, in case there was before
+                                var processerrorsTemplateSource = document.getElementById("processerrorsinfo-template").innerHTML;
+                                var processerrorsTemplate = Handlebars.compile(processerrorsTemplateSource);   
+                                $('#processerrorsinfotable tbody').html(processerrorsTemplate([]));
+                            }
+                        }, 'GET');
+
                         
                     });
                 } else {
