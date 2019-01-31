@@ -36,6 +36,13 @@ export function getLeftNav(
                  <strong>Active Processes</strong>
                 </a>
               </li>
+              <br/>
+              <li class="nav-item">
+                <a class="nav-link" href="#processerrorsdiv">
+                  <span><i class="fa fa-bug"></i></span>
+                 <strong>Process Errors</strong>
+                </a>
+              </li>
             </ul>
           </div>
         </nav>`;

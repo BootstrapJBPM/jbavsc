@@ -7,7 +7,7 @@ import { getProcessDefsContent } from "./processDefsContent";
 import { getLeftNav } from "./leftNav";
 import { addScripts } from "./scripts";
 
-export function getMonitorContent(
+export function getDebugContent(
 	context: ExtensionContext,
 	appState: AppState,
 	media: any
@@ -24,6 +24,7 @@ export function getMonitorContent(
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-confirmation2@4.0.2/dist/bootstrap-confirmation.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
 </head>
 <body>
@@ -33,7 +34,7 @@ export function getMonitorContent(
     &nbsp;&nbsp;&nbsp;<img src="${
 		media.extlogo
 	}" width="40" height="40" class="d-inline-block align-middle" alt="">
-   <strong>jBPM Business App Monitor</strong> (${appState.url})
+   <strong>jBPM Business App Debugger</strong> (${appState.url})
     </span>
     </nav>
 

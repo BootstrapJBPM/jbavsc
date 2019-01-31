@@ -35,25 +35,56 @@ export function getProcessDefsContent(
     </div>
 
     <div class="modal fade" id="pdefimgmodal" tabindex="-1" role="dialog" aria-labelledby="pdefimglabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="pdefimglabel">Process Definition Image</h5>
+                    <h5 class="modal-title" id="pdefimglabel">Process Definition Info</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="iframe-container">
-                        <iframe id="pdefimgmodalframe" class="embed-responsive-item" src=""></iframe>
-                    </div>
+                    <section id="tabs" class="project-tab">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <nav>
+                                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                            <a class="nav-item nav-link active" id="pdef-img-tab" data-toggle="tab" href="#pdef-image" role="tab" aria-controls="pdef-image" aria-selected="true">Image</a>
+                                            <a class="nav-item nav-link" id="pdef-vars-tab" data-toggle="tab" href="#pdef-vars" role="tab" aria-controls="pdef-vars" aria-selected="false">Variables</a>
+                                        </div>
+                                    </nav>
+                                    <div class="tab-content" id="nav-tabContent">
+                                        <div class="tab-pane fade show active" id="pdef-image" role="tabpanel" aria-labelledby="pdef-image-tab">
+                                            <div class="iframe-container">
+                                                <iframe id="pdefimgmodalframe" class="embed-responsive-item" src=""></iframe>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="pdef-vars" role="tabpanel" aria-labelledby="pdef-vars-tab">
+                                            <table class="table table-hover" id="processvarsinfotable">
+                                                <thead>
+                                                    <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Type</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="modal fade" id="startprocessmodal" tabindex="-1" role="dialog" aria-labelledby="startprocesslabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="startprocesslabel">Start business process</h5>
@@ -78,9 +109,19 @@ export function getProcessDefsContent(
                 <td><small>{{ package }}:{{ process-version }}:{{ process-name }}</small></td>
                 <td><small>{{ container-id }}</small></td>
                 <td><small>
-                    <button type="button" id="pdef-view-{{ @index }}" class="btn btn-outline-primary btn-sm" data-pid="{{ process-id }}" data-cid="{{ container-id }}">View</button>&nbsp;
+                    <button type="button" id="pdef-view-{{ @index }}" class="btn btn-outline-primary btn-sm" data-pid="{{ process-id }}" data-cid="{{ container-id }}">Info</button>&nbsp;
                     <button type="button" id="pdef-start-{{ @index }}" class="btn btn-outline-success btn-sm" data-pid="{{ process-id }}" data-cid="{{ container-id }}">Start</button>
                 </small></td>
+            </tr>
+        {{/each}}
+    </script>
+    
+    <script id="processvarsinfo-template" type="text/x-handlebars-template">
+        {{#each this}}
+            <tr>
+                <th scope="row">{{ inc @index }}</th>
+                <td>{{ @key }}</td>
+                <td>{{ this }}</td>
             </tr>
         {{/each}}
     </script>`;

@@ -1,10 +1,10 @@
-import { window, ExtensionContext } from "vscode";
+import { ExtensionContext } from "vscode";
 import AppState from "./appState";
 import MultiStepInput from "../shared/multistep";
-import { createMonitorPanel } from "./monitorPanel";
+import { createDebugPanel } from "./debugPanel";
 
-export async function startMonitor(context: ExtensionContext) {
-	const title = "Monitor your jBPM Business App";
+export async function startDebugger(context: ExtensionContext) {
+	const title = "Debug your jBPM Business App";
 
 	async function collectInputs() {
 		const appState = {} as Partial<AppState>;
@@ -83,5 +83,5 @@ export async function startMonitor(context: ExtensionContext) {
 	if (!appState.url.endsWith("/")) {
 		appState.url = appState.url + "/";
 	}
-	createMonitorPanel(context, appState);
+	createDebugPanel(context, appState);
 }

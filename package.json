@@ -28,7 +28,7 @@
 	],
 	"activationEvents": [
 		"onCommand:jbpm.jbavsc",
-		"onCommand:jbpm.jbavsc.monitor"
+		"onCommand:jbpm.jbavsc.debug"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -37,8 +37,8 @@
 				"title": "Generate jBPM Business Application"
 			},
 			{
-				"command": "jbpm.jbavsc.monitor",
-				"title": "Monitor your jBPM Business Application"
+				"command": "jbpm.jbavsc.debug",
+				"title": "Debug your jBPM Business Application"
 			}
 		]
 	},

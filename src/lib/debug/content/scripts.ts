@@ -67,9 +67,12 @@ export function addScripts(
             });
         }
 
-        function appRestGetCall(url, callback){
+        function appRestGetCall(url, callback, atype) {
+            if(!atype) {
+                atype = 'GET'
+            }
             $.ajax({
-                type: "GET",
+                type: atype,
                 url: url,
                 crossDomain: true,
                 xhrFields: {
@@ -95,6 +98,18 @@ export function addScripts(
             var defsurl = "${
 				appState.url
 			}rest/server/containers/" + cid + "/images/processes/" + pid;
+            
+            // get process variables
+            appRestGetCall("${
+				appState.url
+			}rest/server/containers/" + cid + "/processes/definitions/" + pid + "/variables", function(data) {
+                if(data) {
+                    var processvarsTemplateSource = document.getElementById("processvarsinfo-template").innerHTML;
+                    var processvarsTemplate = Handlebars.compile(processvarsTemplateSource);   
+                    $('#processvarsinfotable tbody').html(processvarsTemplate(data.responseJSON.variables));
+                }
+            });
+
             $("#pdefimgmodalframe").attr('src', defsurl);
             $('#pdefimgmodal').modal('show');
         }
@@ -103,8 +118,29 @@ export function addScripts(
             var insturl = "${
 				appState.url
 			}rest/server/containers/" + cid + "/images/processes/instances/" + pid;
+            
+            // get process instance variables
+            appRestGetCall("${
+				appState.url
+			}rest/server/containers/" + cid + "/processes/instances/" + pid + "/variables", function(data) {
+                if(data) {
+                    var processinstvarsTemplateSource = document.getElementById("processinstvarsinfo-template").innerHTML;
+                    var processinstvarsTemplate = Handlebars.compile(processinstvarsTemplateSource);   
+                    $('#processinstvarsinfotable tbody').html(processinstvarsTemplate(data.responseJSON));
+                }
+            });
+
             $("#pinstimgmodalframe").attr('src', insturl);
             $('#pinstimgmodal').modal('show');
+
+        }
+
+        function abortProcessInst(pid, cid, processid) {
+            appRestGetCall("${
+				appState.url
+			}rest/server/containers/" + cid + "/processes/instances/" + pid, function(data) {
+                    getMonitoringData();
+            }, 'DELETE');
         }
 
         function startProcessDef(pid, cid) {
@@ -214,6 +250,7 @@ export function addScripts(
 											appState.url
 										}rest/server/containers/" + container["container-id"] + "/processes/instances/" + inst["process-instance-id"], function(data) {
                                             if(data) {
+
                                                 updatedInst.push(data.responseJSON);
 
                                                 var processinstTemplateSource = document.getElementById("processinstinfo-template").innerHTML;
@@ -224,6 +261,12 @@ export function addScripts(
                                                 // process inst view
                                                 $("button[id^='pinst-view']").click(function() {
                                                     viewProcessInst($(this).data('pid'), $(this).data('cid'), $(this).data('processid'));
+                                                });
+
+                                                // abort inst
+                                                $('.bs-confirmation').confirmation();
+                                                $("button[id^='pinst-abort']").on("confirmed.bs.confirmation", function () {
+                                                    abortProcessInst($(this).data('pid'), $(this).data('cid'), $(this).data('processid'));
                                                 });
 
                                                 // task instance start

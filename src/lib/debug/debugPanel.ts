@@ -1,15 +1,15 @@
 import { window, ExtensionContext, ViewColumn, Uri } from "vscode";
 import AppState from "./appState";
-import { getMonitorContent } from "./content/monitorContent";
+import { getDebugContent } from "./content/debugContent";
 import * as path from "path";
 
-export async function createMonitorPanel(
+export async function createDebugPanel(
 	context: ExtensionContext,
 	appState: AppState
 ) {
-	const createMonitorPanel = window.createWebviewPanel(
-		"jbpmAppMonitor",
-		`jBPM App Monitor - ${appState.url}`,
+	const createDebugPanel = window.createWebviewPanel(
+		"jbpmAppDebugger",
+		`jBPM App Debugger - ${appState.url}`,
 		ViewColumn.One,
 		{
 			enableScripts: true
@@ -21,7 +21,7 @@ export async function createMonitorPanel(
 		extcss: getMediaUri(context, "ext_style.css")
 	};
 
-	createMonitorPanel.onDidDispose(
+	createDebugPanel.onDidDispose(
 		() => {
 			// panel cleanup code here...
 		},
@@ -29,13 +29,9 @@ export async function createMonitorPanel(
 		context.subscriptions
 	);
 
-	createMonitorPanel.webview.html = getMonitorContent(
-		context,
-		appState,
-		media
-	);
+	createDebugPanel.webview.html = getDebugContent(context, appState, media);
 
-	createMonitorPanel.webview.onDidReceiveMessage(
+	createDebugPanel.webview.onDidReceiveMessage(
 		message => {
 			switch (message.command) {
 				case "info":
