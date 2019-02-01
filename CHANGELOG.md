@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.6.0 – 2018-02-01
+
+-   Added new command "Debug your jBPM Business Application". This can be used to debug processes in your app.
+-   Refactored code so it contributions should be much easier to do now
+-   Added local media images and css that can be used to have unique look/feel across current/future commands
+-   Updated README
+
 ## 0.5.0 – 2018-01-26
 
 -   Removed the need to have npm installed on machine
