@@ -12,6 +12,8 @@ Currently it provides in-editor commands to:
 
     (more to come **soon!**)
 
+---
+
 **Table of Contents**
 
 -   [Commands](#commands)
@@ -24,6 +26,8 @@ Currently it provides in-editor commands to:
     -   [Debug your app](#debug-your-app)
 -   [Building from source](#building-from-source)
 -   [Contributing](#contributing)
+
+---
 
 ## Commands
 
