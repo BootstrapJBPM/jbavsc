@@ -123,6 +123,20 @@ for more infomation about your business app go to the jbpm.org.
 
 ### Debug your app
 
+---
+
+**Important**
+In order to debug your app currently there is need to update your apps DefaultWebSecurityConfig.java file which is generted for you by default.
+This need will no longer be needed once jBPM community version 7.18.0.Final is released. For now you have to go to your apps **service** directory
+and edit src/main/resources/DefaultWebSecurityConfig.java. Cut/paste the code from this Gist: https://gist.github.com/tsurdilo/3fe68ec089e226a007bdfc4852e293e9
+
+These changes will enable CORS in your business app and will aloow the debug console to be able to get information from your running business application.
+Without this change currently your debug console will **not** be able to query information from your business app.
+Again, once the new community jBPM version is released (should be within a month) when you generate your business app this change will no longer
+be necessary as the code mentioned in the gist will be included there by default.
+
+---
+
 Once your business app is started you can start debugging it.It makes sense however before to add some assets into your kjar module (business rules, business processes etc) which then you can debug.
 Debugging feature will work without those, however there will be no processes to start and debug.
 
