@@ -12,7 +12,8 @@ Currently it provides in-editor commands to:
 
     (more to come **soon!**)
 
-**If you rather watch a video on all the features of this extension than read the docs here watch: **
+If you rather watch a video on all the features than read the docs here is a video showing off all currently
+available featues: https://www.youtube.com/watch?v=Ay_eJSvCyUM&
 
 ---
 
