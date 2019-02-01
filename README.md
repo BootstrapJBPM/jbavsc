@@ -12,7 +12,7 @@ Currently it provides in-editor commands to:
 
     (more to come **soon!**)
 
----
+**If you rather watch a video on all the features of this extension than read the docs here watch: **
 
 ## Table of Contents
 
@@ -126,6 +126,7 @@ for more infomation about your business app go to the jbpm.org.
 ---
 
 **Important**
+
 In order to debug your app currently there is need to update your apps DefaultWebSecurityConfig.java file which is generted for you by default.
 This need will no longer be needed once jBPM community version 7.18.0.Final is released. For now you have to go to your apps **service** directory
 and edit src/main/resources/DefaultWebSecurityConfig.java. Cut/paste the code from this Gist: https://gist.github.com/tsurdilo/3fe68ec089e226a007bdfc4852e293e9
@@ -158,6 +159,58 @@ change the default values to reflrect your changes.
 After these steps the extension will open a new editor window with your debug console:
 
 ![Debug console](assets/debugEditor.png)
+
+The debug console is made up of 5 collapsible sections:
+
+1. **Server** info - gives you the basic information about your business app server:
+
+![Server info](assets/serverInfo.png)
+
+2. **Container info** - gives you the basic information your deployed containers:
+
+![Container info](assets/containerInfo.png)
+
+3. **Process Definitions Info** - lists all process definitions available across your containers:
+
+![Process Defs Info](assets/processDefsScreen.png)
+
+It allows you to view the process definitions image (clicking on the View button):
+
+![Process Def Image](assets/processDefsViewImage.png)
+
+It also allows you to view the process definitions variables:
+
+![Process Def Variables](assets/processDefsViewVariables.png)
+
+As well as start a process, which will then bring up the process form where you can fill in the initial variable values and start it:
+
+![Process Def Start](assets/processDefsStartProcess.png)
+
+4. **Active Processes Info** - Lists all active process intsances:
+
+![Active Processes List](assets/activeProcessesSection.png)
+
+Also allows you to view the current execution state of your process instance:
+
+![Active Processes State](assets/activeProcessesImage.png)
+
+You can view the current values of all your process variables and also change/update their values for debugging purposes:
+
+![Active Processes Variables](assets/activeProcessesVariables.png)
+
+You can also abort a process instance if you wish:
+
+![Active Processes Abort](assets/activeProcessesAbort.png)
+
+And also allow you to advance process execution by working on currently active tasks:
+
+![Active Processes Advance Task](assets/activeProcessesCompleteTask.png)
+
+5. ** Process Errors** -- List all of execution errors that your business app encounters during process execution.
+
+![Processing Errors](assets/processErrorsShow.png)
+
+You can acknowledge an error, basically saying "yes, I will work to fix this", which will remove it from the error list.
 
 ## Building from source
 
