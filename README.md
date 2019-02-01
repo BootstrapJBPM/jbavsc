@@ -14,7 +14,7 @@ Currently it provides in-editor commands to:
 
 ---
 
-**Table of Contents**
+## Table of Contents
 
 -   [Commands](#commands)
 -   [Usage](#usage)
@@ -103,6 +103,47 @@ will be guided through a 5 step process:
 After the generation process this extension will generate your jBPM Business app zip file and also extract it into your current working directory. You will see the generated app modules:
 
 ![Generated App](assets/generatedApp.png)
+
+### Start your app
+
+You can start your business app in VS Code as well, for that open the VS Code Terminal first, then
+go into your apps \*service\*\* directory. In here you will find the various launch scripts for different
+Operating systems. So for example on Unix/OSX you would do:
+
+![Start Business App](assets/startBusinessApp.png)
+
+This will build your kjar, model, and services modules and launch your app (which is a spring boot app).
+You will be able to access it in browser for example under
+
+```
+http://localhost:8090/
+```
+
+for more infomation about your business app go to the jbpm.org.
+
+### Debug your app
+
+Once your business app is started you can start debugging it.It makes sense however before to add some assets into your kjar module (business rules, business processes etc) which then you can debug.
+Debugging feature will work without those, however there will be no processes to start and debug.
+
+To add business processes to your business application add bpmn2 processes into your apps **kjar** module
+in its src/main/resources folder and re-start your business app with the previously mentioned launch scripts. This will build and compile them so they are available when your app launches.
+
+To start debugging your app launch the VS Code Command Palette and run the "Debug your jBPM Business Application" command.
+Somilar to when generating your app you will first be presented with three quick steps asking to you provide info on where your business app is running:
+
+![Debug enter app rest url](assets/debugStepOne.png)
+
+![Debug enter auth user](assets/debugStepTwo.png)
+
+![Debug enter auth password](assets/debugStepThree.png)
+
+By default your business app authentication user/password for the rest api are user/user. If you have changed that in your code, you need to
+change the default values to reflrect your changes.
+
+After these steps the extension will open a new editor window with your debug console:
+
+![Debug console](assets/debugEditor.png)
 
 ## Building from source
 
