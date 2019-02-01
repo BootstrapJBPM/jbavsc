@@ -22,7 +22,7 @@ Currently it provides in-editor commands to:
         -   [Generation Options](#generation-options)
         -   [App generation via Configuration](#app-generation-via-configuration)
         -   [Generated app in your working directory](#generated-app-in-your-working-directory)
-    -   [Start your app](#start-you-rapp)
+    -   [Start your app](#start-your-app)
     -   [Debug your app](#debug-your-app)
 -   [Building from source](#building-from-source)
 -   [Contributing](#contributing)
