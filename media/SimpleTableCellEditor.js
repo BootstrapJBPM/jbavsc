@@ -1,311 +1,334 @@
 class SimpleTableCellEdition {
-	constructor(elem, _cellParams) {
-		this.Elem = elem;
-		this.oldContent = $(elem).html();
-		this.oldValue = _cellParams.internals.extractValue(elem);
-		this.cellParams = _cellParams;
-	}
+
+    constructor(elem, _cellParams) {
+
+        this.Elem = elem;
+        this.oldContent = $(elem).html();
+        this.oldValue = _cellParams.internals.extractValue(elem);
+        this.cellParams = _cellParams;
+    }
+
 }
 
 class SimpleTableCellEditor {
-	constructor(_tableId, _params) {
-		var _instance = this;
 
-		if (typeof _tableId === "undefined") _tableId = "table";
+    constructor(_tableId, _params) {
 
-		this.tableId = _tableId; //Store the tableId (One CellEditor must be instantiated for each table)
+        var _instance = this;
 
-		this.params = _instance._GetExtendedEditorParams(_params); //Load default params over given ones
-		this.CellEdition = null; //CellEdition contains the current edited cell
+        if (typeof _tableId === 'undefined')
+            _tableId = "table";
 
-		//If DataTable : Handling DataTable reload event
-		this._TryHandleDataTableReloadEvent();
+        this.tableId = _tableId; //Store the tableId (One CellEditor must be instantiated for each table)
 
-		//Handle click outside table to end edition
-		$(document).mouseup(function(e) {
-			var container = $(`#${_instance.tableId}`);
+        this.params = _instance._GetExtendedEditorParams(_params); //Load default params over given ones
+        this.CellEdition = null; //CellEdition contains the current edited cell
 
-			if (
-				!container.is(e.target) &&
-				container.has(e.target).length === 0
-			) {
-				_instance._FreeCurrentCell();
-			}
+        //If DataTable : Handling DataTable reload event
+        this._TryHandleDataTableReloadEvent();
 
-			return;
-		});
-	}
+        //Handle click outside table to end edition
+        $(document).mouseup(function (e) {
 
-	SetEditable(elem, _cellParams) {
-		var _instance = this;
+            var container = $(`#${_instance.tableId}`);
 
-		if (!_instance._isValidElem(elem)) return;
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
+                _instance._FreeCurrentCell();
+            }
 
-		var cellParams = _instance._GetExtendedCellParams(_cellParams);
+            return;
+        });
+    }
 
-		//If click on td (not already in edit ones)
-		$(elem).on("click", function(evt) {
-			if ($(this).hasClass(_instance.params.inEditClass)) return;
 
-			_instance._EditCell(this, cellParams);
-		});
+    SetEditable(elem, _cellParams) {
 
-		$(elem).on("keydown", function(event) {
-			if (!$(this).hasClass(_instance.params.inEditClass)) return;
+        var _instance = this;
 
-			_instance._HandleKeyPressed(event.which, this, cellParams);
-		});
-	}
+        if (!_instance._isValidElem(elem))
+            return;
 
-	SetEditableClass(editableClass, _cellParams) {
-		var _instance = this;
+        var cellParams = _instance._GetExtendedCellParams(_cellParams);
 
-		var cellParams = _instance._GetExtendedCellParams(_cellParams);
+        //If click on td (not already in edit ones)
+        $(elem).on('click', function (evt) {
 
-		//If click on td (not already in edit ones)
-		$(`#${this.tableId}`).on(
-			"click",
-			`td.${editableClass}:not(.${_instance.params.inEditClass})`,
-			function() {
-				_instance._EditCell(this, cellParams);
-			}
-		);
+            if ($(this).hasClass(_instance.params.inEditClass))
+                return;
 
-		$(`#${this.tableId}`).on(
-			"keydown",
-			`td.${editableClass}.${_instance.params.inEditClass}`,
-			function(event) {
-				_instance._HandleKeyPressed(event.which, this, cellParams);
-			}
-		);
-	}
+            _instance._EditCell(this, cellParams);
 
-	//Private methods
-	_HandleKeyPressed(which, elem, cellParams) {
-		if (cellParams.keys.validation.includes(which))
-			this._EndEditCell(elem, cellParams);
-		else if (cellParams.keys.cancellation.includes(which))
-			this._CancelEditCell(elem, cellParams);
-	}
+        });
 
-	_EditCell(elem, cellParams) {
-		//We free up hypothetical previous cell
-		this._FreeCurrentCell();
 
-		this.CellEdition = new SimpleTableCellEdition(elem, cellParams);
+        $(elem).on('keydown', function (event) {
 
-		//Storing DataTable index if table is DataTable
-		if (this.isDataTable) {
-			this.CellEdition.cellIndex = $(`#${this.tableId}`)
-				.DataTable()
-				.cell($(elem))
-				.index();
-		}
+            if (!$(this).hasClass(_instance.params.inEditClass))
+                return;
 
-		//Extract old/current value from cell
-		var oldVal = cellParams.internals.extractValue(elem);
 
-		//flagging working cell
-		$(elem).addClass(this.params.inEditClass);
+            _instance._HandleKeyPressed(event.which, this, cellParams);
 
-		//Rendering
-		cellParams.internals.renderEditor(elem, oldVal);
+        });
 
-		//Trigger custom event
-		this._FireOnEditEnterEvent(elem, oldVal);
-	}
+    }
 
-	_EndEditCell(elem, cellParams) {
-		this._FreeCell(elem, cellParams, true);
-	}
+    SetEditableClass(editableClass, _cellParams) {
 
-	_CancelEditCell(elem, cellParams) {
-		this._FreeCell(elem, cellParams, false);
-	}
+        var _instance = this;
 
-	_FreeCell(elem, cellParams, keepChanges) {
-		if (!this._isValidElem(elem) || this.CellEdition === null) return;
+        var cellParams = _instance._GetExtendedCellParams(_cellParams);
 
-		//Get new val
-		var newVal = cellParams.internals.extractEditorValue(elem);
+        //If click on td (not already in edit ones)
+        $(`#${this.tableId}`).on('click', `td.${editableClass}:not(.${_instance.params.inEditClass})`, function () {
+            _instance._EditCell(this, cellParams);
+        });
 
-		//clean cell
-		$(elem).removeClass(this.params.inEditClass);
-		$(elem).html("");
 
-		//format new value
-		var formattedNewVal = cellParams.formatter(newVal);
+        $(`#${this.tableId}`).on('keydown', `td.${editableClass}.${_instance.params.inEditClass}`, function (event) {
 
-		//if validation method return false for new value AND value changed
-		if (
-			!cellParams.validation(newVal) ||
-			this.CellEdition.oldValue === formattedNewVal
-		)
-			keepChanges = false;
+            _instance._HandleKeyPressed(event.which, this, cellParams);
 
-		//Trigger custom event
-		this._FireOnEditExitEvent(
-			elem,
-			this.CellEdition.oldValue,
-			formattedNewVal,
-			keepChanges
-		);
+        });
 
-		if (keepChanges) {
-			//render new value in cell
-			cellParams.internals.renderValue(elem, formattedNewVal);
+    }
 
-			//Trigger custom event
-			this._FireEditedEvent(
-				elem,
-				this.CellEdition.oldValue,
-				formattedNewVal
-			);
-		} else {
-			//render old value
-			$(elem).html(this.CellEdition.oldContent);
-		}
 
-		this.CellEdition = null;
-	}
+    //Private methods
+    _HandleKeyPressed(which, elem, cellParams) {
 
-	_FreeCurrentCell() {
-		var current = this._GetCurrentEdition();
+        if (cellParams.keys.validation.includes(which))
+            this._EndEditCell(elem, cellParams);
 
-		if (current === null) return;
+        else if (cellParams.keys.cancellation.includes(which))
+            this._CancelEditCell(elem, cellParams);
 
-		this._EndEditCell(current.Elem, current.cellParams);
-	}
+    }
 
-	_GetCurrentEdition() {
-		return this.CellEdition === null ? null : this.CellEdition;
-	}
+    _EditCell(elem, cellParams) {
 
-	_GetExtendedEditorParams(_params) {
-		var _instance = this;
+        //We free up hypothetical previous cell
+        this._FreeCurrentCell();
 
-		return $.extend(true, {}, _instance._GetDefaultEditorParams(), _params);
-	}
+        this.CellEdition = new SimpleTableCellEdition(elem, cellParams);
 
-	_GetExtendedCellParams(_cellParams) {
-		var _instance = this;
+        //Storing DataTable index if table is DataTable
+        if (this.isDataTable) {
+            this.CellEdition.cellIndex = $(`#${this.tableId}`).DataTable().cell($(elem)).index();
+        }
 
-		return $.extend(
-			true,
-			{},
-			_instance._GetDefaultCellParams(),
-			_cellParams
-		);
-	}
+        //Extract old/current value from cell
+        var oldVal = cellParams.internals.extractValue(elem);
 
-	//Defaults
-	_GetDefaultEditorParams() {
-		return {
-			inEditClass: "inEdit" //class used to flag cell in edit mode
-		};
-	}
+        //flagging working cell
+        $(elem).addClass(this.params.inEditClass);
 
-	_GetDefaultCellParams() {
-		return {
-			validation: value => {
-				return true;
-			}, //method used to validate new value
-			formatter: value => {
-				return value;
-			}, //Method used to format new value
-			keys: {
-				validation: [13],
-				cancellation: [27]
-			},
-			internals: this._GetDefaultInternals()
-		};
-	}
+        //Rendering 
+        cellParams.internals.renderEditor(elem, oldVal);
 
-	_GetDefaultInternals() {
-		return {
-			renderValue: (elem, formattedNewVal) => {
-				$(elem).text(formattedNewVal);
-			},
-			renderEditor: (elem, oldVal) => {
-				$(elem).html(
-					`<input type='text' style="width:100%; max-width:none">`
-				);
-				//Focus part
-				var input = $(elem).find("input");
-				input.focus();
-				input.val(oldVal);
-			},
-			extractEditorValue: elem => {
-				return $(elem)
-					.find("input")
-					.val();
-			},
-			extractValue: elem => {
-				return $(elem).text();
-			}
-		};
-	}
+        //Trigger custom event
+        this._FireOnEditEnterEvent(elem, oldVal);
 
-	//Events
-	_FireOnEditEnterEvent(elem, oldVal) {
-		$(`#${this.tableId}`).trigger({
-			type: "cell:onEditEnter",
-			element: elem,
-			oldValue: oldVal
-		});
-	}
+    }
 
-	_FireOnEditExitEvent(elem, oldVal, newVal, applied) {
-		$(`#${this.tableId}`).trigger({
-			type: "cell:onEditExit",
-			element: elem,
-			newValue: newVal,
-			oldValue: oldVal,
-			applied: applied
-		});
-	}
+    _EndEditCell(elem, cellParams) {
+        this._FreeCell(elem, cellParams, true);
+    }
 
-	_FireEditedEvent(elem, oldVal, newVal) {
-		$(`#${this.tableId}`).trigger({
-			type: "cell:edited",
-			element: elem,
-			newValue: newVal,
-			oldValue: oldVal
-		});
-	}
+    _CancelEditCell(elem, cellParams) {
+        this._FreeCell(elem, cellParams, false);
+    }
 
-	//DataTable specific methods
-	_TryHandleDataTableReloadEvent() {
-		var _instance = this;
-		this.isDataTable = false;
+    _FreeCell(elem, cellParams, keepChanges) {
 
-		try {
-			if ($.fn.DataTable.isDataTable(`#${_instance.tableId}`))
-				_instance.isDataTable = true;
-		} catch (e) {
-			return;
-		}
+        if (!this._isValidElem(elem) || this.CellEdition === null)
+            return;
 
-		if (_instance.isDataTable) {
-			$(`#${_instance.tableId}`).on("draw.dt", function() {
-				if (
-					_instance.CellEdition !== null &&
-					_instance.CellEdition.Elem !== null
-				) {
-					var node = $(`#${_instance.tableId}`)
-						.DataTable()
-						.cell(_instance.CellEdition.cellIndex)
-						.node();
-					_instance._EditCell(node, _instance.CellEdition.cellParams);
-				}
-			});
-		}
-	}
+        //Get new val
+        var newVal = cellParams.internals.extractEditorValue(elem);
 
-	//Utils
-	_isValidElem(elem) {
-		return (
-			elem !== null && typeof elem !== "undefined" && $(elem).length > 0
-		);
-	}
+        //clean cell
+        $(elem).removeClass(this.params.inEditClass);
+        $(elem).html('');
+
+        //format new value
+        var formattedNewVal = cellParams.formatter(newVal);
+
+        //if validation method return false for new value AND value changed
+        if (!cellParams.validation(newVal) || this.CellEdition.oldValue === formattedNewVal)
+            keepChanges = false;
+
+        //Trigger custom event
+        this._FireOnEditExitEvent(elem, this.CellEdition.oldValue, formattedNewVal, keepChanges);
+
+        if (keepChanges) {
+
+            //render new value in cell
+            cellParams.internals.renderValue(elem, formattedNewVal);
+
+            //Trigger custom event
+            this._FireEditedEvent(elem, this.CellEdition.oldValue, formattedNewVal);
+
+        } else {
+
+            //render old value
+            $(elem).html(this.CellEdition.oldContent);
+
+        }
+
+        this.CellEdition = null;
+    }
+
+    _FreeCurrentCell() {
+
+        var current = this._GetCurrentEdition();
+
+        if (current === null)
+            return;
+
+        this._EndEditCell(current.Elem, current.cellParams);
+    }
+
+    _GetCurrentEdition() {
+
+        return (this.CellEdition === null ? null : this.CellEdition);
+    }
+
+
+    _GetExtendedEditorParams(_params) {
+
+        var _instance = this;
+
+        return $.extend(true, {}, _instance._GetDefaultEditorParams(), _params);
+
+    }
+
+    _GetExtendedCellParams(_cellParams) {
+
+        var _instance = this;
+
+        return $.extend(true, {}, _instance._GetDefaultCellParams(), _cellParams);
+
+    }
+
+
+    //Defaults
+    _GetDefaultEditorParams() {
+
+        return {
+            inEditClass: "inEdit" //class used to flag cell in edit mode
+        };
+    }
+
+    _GetDefaultCellParams() {
+
+        return {
+            validation: (value) => {
+                return true;
+            }, //method used to validate new value
+            formatter: (value) => {
+                return value;
+            }, //Method used to format new value
+            keys: {
+                validation: [13],
+                cancellation: [27]
+            },
+            internals: this._GetDefaultInternals()
+        };
+
+    }
+
+    _GetDefaultInternals() {
+
+        return {
+            renderValue: (elem, formattedNewVal) => {
+                $(elem).text(formattedNewVal);
+            },
+            renderEditor: (elem, oldVal) => {
+                $(elem).html(`<input type='text' style="width:100%; max-width:none">`);
+                //Focus part
+                var input = $(elem).find('input');
+                input.focus();
+                input.val(oldVal);
+            },
+            extractEditorValue: (elem) => {
+                return $(elem).find('input').val();
+            },
+            extractValue: (elem) => {
+                return $(elem).text();
+            }
+        };
+
+    }
+
+
+    //Events
+    _FireOnEditEnterEvent(elem, oldVal) {
+
+        $(`#${this.tableId}`).trigger({
+            type: "cell:onEditEnter",
+            element: elem,
+            oldValue: oldVal
+        });
+    }
+
+    _FireOnEditExitEvent(elem, oldVal, newVal, applied) {
+
+        $(`#${this.tableId}`).trigger({
+            type: "cell:onEditExit",
+            element: elem,
+            newValue: newVal,
+            oldValue: oldVal,
+            applied: applied
+        });
+    }
+
+    _FireEditedEvent(elem, oldVal, newVal) {
+
+        $(`#${this.tableId}`).trigger({
+            type: "cell:edited",
+            element: elem,
+            newValue: newVal,
+            oldValue: oldVal
+        });
+    }
+
+
+    //DataTable specific methods
+    _TryHandleDataTableReloadEvent() {
+
+        var _instance = this;
+        this.isDataTable = false;
+
+        try {
+            if ($.fn.DataTable.isDataTable(`#${_instance.tableId}`))
+                _instance.isDataTable = true;
+        } catch (e) {
+            return;
+        }
+
+        if (_instance.isDataTable) {
+
+            $(`#${_instance.tableId}`).on('draw.dt', function () {
+
+                if (_instance.CellEdition !== null && _instance.CellEdition.Elem !== null) {
+
+                    var node = $(`#${_instance.tableId}`).DataTable().cell(_instance.CellEdition.cellIndex).node();
+                    _instance._EditCell(node, _instance.CellEdition.cellParams);
+
+                }
+
+            });
+
+        }
+
+    }
+
+
+
+    //Utils
+    _isValidElem(elem) {
+        return (elem !== null && typeof elem !== 'undefined' && $(elem).length > 0);
+    }
+
 }

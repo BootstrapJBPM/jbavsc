@@ -14,6 +14,8 @@ Currently it provides in-editor commands to:
 
 **If you rather watch a video on all the features of this extension than read the docs here watch: **
 
+---
+
 ## Table of Contents
 
 -   [Commands](#commands)
