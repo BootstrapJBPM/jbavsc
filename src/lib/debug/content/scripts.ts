@@ -32,6 +32,14 @@ export function addScripts(
                 getMonitoringData();
             });
 
+            // make variables table editable
+            var editor = new SimpleTableCellEditor("processinstvarsinfotable");
+            editor.SetEditableClass("editPVar");
+
+            $('#processinstvarsinfotable').on("cell:edited", function (event) {
+                updateProcessVarValue(event.element.dataset.vname, event.element.dataset.pid, event.element.dataset.cid, event.newValue);
+            });
+
             // first check if app is running
             checkAppIsRunning("${appState.url}rest/server", function(running) {
                 if(running) {
@@ -93,6 +101,8 @@ export function addScripts(
                 }
             });
         }
+        
+
 
         function viewProcessDef(pid, cid) {
             var defsurl = "${
@@ -132,14 +142,6 @@ export function addScripts(
                     var processinstvarsTemplateSource = document.getElementById("processinstvarsinfo-template").innerHTML;
                     var processinstvarsTemplate = Handlebars.compile(processinstvarsTemplateSource);   
                     $('#processinstvarsinfotable tbody').html(processinstvarsTemplate(customData));
-
-                    // make variables table editable
-                    editor = new SimpleTableCellEditor("processinstvarsinfotable");
-                    editor.SetEditableClass("editPVar");
-
-                    $('#processinstvarsinfotable').on("cell:edited", function (event) {
-                        updateProcessVarValue(event.element.dataset.vname, event.element.dataset.pid, event.element.dataset.cid, event.newValue);
-                    });
                 }
             });
 
@@ -181,9 +183,33 @@ export function addScripts(
         }
 
         function updateProcessVarValue(varname, pid, cid, newvalue) {
-            vscode.postMessage({
-                command: 'alert',
-                text:  "VarName: " + varname + " PID: " + pid + " CID: " + cid + " New Value: " + newvalue
+            
+            $.ajax({
+                type: 'POST',
+                url: "${
+					appState.url
+				}rest/server/containers/" + cid + "/processes/instances/" + pid + "/variables/",
+                crossDomain: true,
+                xhrFields: {
+                    withCredentials: true
+                },
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify({[varname]: newvalue}),
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Accept': 'application/json',
+                    'Content-Type' : 'application/json',
+                    'Authorization': 'Basic ' + btoa('${appState.username}:${
+		appState.password
+	}')
+                },
+                complete: function(data) {
+                    return true;
+                },
+                error: function(error) {
+                    return false;
+                }
             });
         }
                         
