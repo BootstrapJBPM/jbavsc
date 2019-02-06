@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.7.0 – 2018-02-06
+
+-   Added new community version 7.17.0.Final for generation
+-   Code refactoring
+
 ## 0.6.0 – 2018-02-01
 
 -   Added new command "Debug your jBPM Business Application". This can be used to debug processes in your app.
