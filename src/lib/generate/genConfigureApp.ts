@@ -23,11 +23,12 @@ export async function genConfigureApp(context: ExtensionContext) {
 	];
 
 	const appVersions: QuickPickItem[] = [
-		{ label: "7.17.0-SNAPSHOT" },
+		{ label: "7.18.0-SNAPSHOT" },
+		{ label: "7.17.0.Final" },
 		{ label: "7.16.0.Final" },
 		{ label: "7.15.0.Final" },
 		{ label: "7.14.0.Final" },
-		{ label: "7.15.0.Final" },
+		{ label: "7.13.0.Final" },
 		{ label: "7.12.0.Final" }
 	];
 
