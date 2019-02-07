@@ -1,5 +1,13 @@
+html,
 body {
+	height: 100%;
 	font-size: 0.875rem;
+}
+
+.container-fluid {
+	height: 100%;
+	overflow-y: auto;
+	overflow-x: auto;
 }
 
 .sidebar {
@@ -168,4 +176,10 @@ body {
 	text-decoration: none;
 	color: #333;
 	font-weight: 600;
+}
+
+.preview {
+	height: 100%;
+	font-size: 0.875rem;
+	margin-top: 60px;
 }

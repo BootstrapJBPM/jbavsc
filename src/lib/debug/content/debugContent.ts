@@ -38,7 +38,10 @@ export function getDebugContent(
 	}" width="40" height="40" class="d-inline-block align-middle" alt="">
    <strong>jBPM Business App Debugger</strong> (${appState.url})
     </span>
-    </nav>
+    <div class="pull-right">
+        <button id="refreshdata" type="button" class="btn btn-secondary btn-sm"><i class="fa fa-refresh"></i>&nbsp;Refresh info</button>&nbsp;&nbsp;&nbsp;
+    </div>
+</nav>
 
 <div class="container-fluid">
       <div class="row">

@@ -1,7 +1,7 @@
-import { window, ExtensionContext, ViewColumn, Uri } from "vscode";
+import { window, ExtensionContext, ViewColumn } from "vscode";
 import AppState from "./appState";
 import { getDebugContent } from "./content/debugContent";
-import * as path from "path";
+import { getMedia } from "../shared/utils";
 
 export async function createDebugPanel(
 	context: ExtensionContext,
@@ -16,12 +16,7 @@ export async function createDebugPanel(
 		}
 	);
 
-	const media = {
-		extlogo: getMediaUri(context, "ext_logo.png"),
-		extcss: getMediaUri(context, "ext_style.css"),
-		extjs: getMediaUri(context, "ext_script.js"),
-		celleditorjs: getMediaUri(context, "SimpleTableCellEditor.js")
-	};
+	const media = getMedia(context);
 
 	createDebugPanel.onDidDispose(
 		() => {
@@ -47,11 +42,4 @@ export async function createDebugPanel(
 		undefined,
 		context.subscriptions
 	);
-}
-
-function getMediaUri(context: ExtensionContext, mediaName: string): string {
-	var onDiskPath = Uri.file(
-		path.join(context.extensionPath, "media", mediaName)
-	);
-	return onDiskPath.with({ scheme: "vscode-resource" }).toString();
 }

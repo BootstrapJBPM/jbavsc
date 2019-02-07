@@ -28,20 +28,30 @@
 	],
 	"activationEvents": [
 		"onCommand:jbpm.jbavsc",
-		"onCommand:jbpm.jbavsc.debug"
+		"onCommand:jbpm.jbavsc.debug",
+		"onCommand:jbpm.jbavsc.processquickview"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [
-			{
+		"commands": [{
 				"command": "jbpm.jbavsc",
 				"title": "Generate jBPM Business Application"
 			},
 			{
 				"command": "jbpm.jbavsc.debug",
 				"title": "Debug your jBPM Business Application"
+			},
+			{
+				"command": "jbpm.jbavsc.processquickview",
+				"title": "Process Quick View"
 			}
-		]
+		],
+		"menus": {
+			"explorer/context": [{
+				"when": "resourceFilename =~ /.*\\.(bpmn|bpmn2)/",
+				"command": "jbpm.jbavsc.processquickview"
+			}]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",

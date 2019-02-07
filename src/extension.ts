@@ -1,8 +1,9 @@
 "use strict";
 
-import { commands, ExtensionContext } from "vscode";
+import { commands, ExtensionContext, Uri } from "vscode";
 import { startGen } from "./lib/generate/startGen";
 import { startDebugger } from "./lib/debug/debugMonitor";
+import { startPreview } from "./lib/preview/startPreview";
 
 export function activate(context: ExtensionContext) {
 	context.subscriptions.push(
@@ -11,6 +12,12 @@ export function activate(context: ExtensionContext) {
 		}),
 		commands.registerCommand("jbpm.jbavsc.debug", async () => {
 			startDebugger(context);
-		})
+		}),
+		commands.registerCommand(
+			"jbpm.jbavsc.processquickview",
+			async (uri: Uri) => {
+				startPreview(context, uri);
+			}
+		)
 	);
 }

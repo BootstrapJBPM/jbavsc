@@ -1,3 +1,15 @@
+function debugCheck(url) {
+    checkAppIsRunning(url, function (running) {
+        if (running) {
+            $("#cannotconnectdiv").hide();
+            getMonitoringData();
+        } else {
+            $("#cannotconnectdiv").show();
+            clearMonitoringData();
+        }
+    });
+}
+
 function checkAppIsRunning(url, callback) {
     $.ajax({
         type: "HEAD",
@@ -199,6 +211,64 @@ function updateProcessVarValue(varname, pid, cid, newvalue) {
             return false;
         }
     });
+}
+
+// clears monitoring data
+function clearMonitoringData() {
+    // server info
+    $("#serverInfo-serverid").text("");
+    $("#serverInfo-servername").text("");
+    $("#serverInfo-serverversion").text("");
+    $("#serverInfo-servercapabilities").text("");
+    $("#serverInfo-serverlocation").text("");
+
+    // containers info
+    var containersTemplateSource = document.getElementById(
+        "containersinfo-template"
+    ).innerHTML;
+    var containersTemplate = Handlebars.compile(
+        containersTemplateSource
+    );
+    $("#containersinfotable tbody").html(
+        containersTemplate([])
+    );
+
+    // process defs
+    var processdefsTemplateSource = document.getElementById(
+        "processdefsinfo-template"
+    ).innerHTML;
+    var processdefsTemplate = Handlebars.compile(
+        processdefsTemplateSource
+    );
+    $("#processdefsinfotable tbody").html(
+        processdefsTemplate([])
+    );
+
+    // process instances
+    var processinstTemplateSource = document.getElementById(
+        "processinstinfo-template"
+    ).innerHTML;
+    var processinstTemplate = Handlebars.compile(
+        processinstTemplateSource
+    );
+    $(
+        "#processinstinfotable tbody"
+    ).html(
+        processinstTemplate(
+            []
+        )
+    );
+
+    // processing errors
+    processerrorsTemplateSource = document.getElementById(
+        "processerrorsinfo-template"
+    ).innerHTML;
+    processerrorsTemplate = Handlebars.compile(
+        processerrorsTemplateSource
+    );
+    $("#processerrorsinfotable tbody").html(
+        processerrorsTemplate({})
+    );
 }
 
 // main function to retrieve data

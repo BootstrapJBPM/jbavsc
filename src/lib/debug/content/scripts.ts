@@ -44,15 +44,17 @@ export function addScripts(
                 updateProcessVarValue(event.element.dataset.vname, event.element.dataset.pid, event.element.dataset.cid, event.newValue);
             });
 
+            // refresh data button 
+            $("#refreshdata").button().click(function() {
+                vscode.postMessage({
+                    command: "info",
+                    text: "Refreshing debug information"
+                });
+                debugCheck("${appState.url}rest/server");
+            });  
+
             // first check if app is running
-            checkAppIsRunning("${appState.url}rest/server", function(running) {
-                if(running) {
-                    $("#cannotconnectdiv").hide();
-                    getMonitoringData();
-                } else {
-                    $("#cannotconnectdiv").show();
-                }
-            });
+            debugCheck("${appState.url}rest/server");
         });
     </script>`;
 }
