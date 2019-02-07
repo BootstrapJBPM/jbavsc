@@ -67,7 +67,11 @@ async function createPreviewPanel(
 					window.showErrorMessage(message.text);
 					return;
 				case "savesvg":
-					fs.writeFile(message.filename, message.svg, function(err) {
+					// start at <svg .../>
+					var svgStart = message.svg.indexOf("<svg");
+					let modifiedSvg = message.svg.substr(svgStart);
+
+					fs.writeFile(message.filename, modifiedSvg, function(err) {
 						if (err) {
 							window.showErrorMessage(
 								"Unable to save svg to file: " + err
