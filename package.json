@@ -49,7 +49,8 @@
 		"menus": {
 			"explorer/context": [{
 				"when": "resourceFilename =~ /.*\\.(bpmn|bpmn2)/",
-				"command": "jbpm.jbavsc.processquickview"
+				"command": "jbpm.jbavsc.processquickview",
+				"group": "jbavscgroup"
 			}]
 		}
 	},

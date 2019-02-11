@@ -9,11 +9,14 @@ Currently it provides in-editor commands to:
 
 1. **Generate** jBPM Business Apps
 2. **Debug** jBPM Business Apps
+3. **View** a business process (bpmn/bpmn2) visually
+4. **Save Process SVG** from a business process (bpmn/bpmn2)
 
     (more to come **soon!**)
 
-If you rather watch a video on all the features than read the docs here is a video showing off all currently
-available featues: https://www.youtube.com/watch?v=Ay_eJSvCyUM&
+If you rather watch a videos on all the features then read the docs here is a list:
+
+1. https://www.youtube.com/watch?v=Ay_eJSvCyUM&
 
 ---
 
@@ -27,6 +30,7 @@ available featues: https://www.youtube.com/watch?v=Ay_eJSvCyUM&
         -   [Generated app in your working directory](#generated-app-in-your-working-directory)
     -   [Start your app](#start-your-app)
     -   [Debug your app](#debug-your-app)
+    -   [Process Quick View](#process-quick-view)
 -   [Building from source](#building-from-source)
 -   [Contributing](#contributing)
 
@@ -41,6 +45,9 @@ After installing this extension you will have two new commands available:
 
 These commands can be accessed via the Command Panellete. To open the Command Pallette
 use F5 for Windows or ⇧⌘P on OSX).
+
+The extension also updates the explorer context menu (menu shown when you right-click on a file in your project).
+For files with extensions .bpmn or .bpmn2 it adds a new menu for the **process quick preview**.
 
 ## Usage
 
@@ -214,6 +221,29 @@ And also allow you to advance process execution by working on currently active t
 ![Processing Errors](assets/processErrorsShow.png)
 
 You can acknowledge an error, basically saying "yes, I will work to fix this", which will remove it from the error list.
+
+## Process Quick View
+
+To preview a business process visually (.bpmn, or .bpmn2 files) right-click on one of those files in your project and select "Process Quick View":
+
+![Quick View Menu](assets/processQuickViewSelect.png)
+
+This will open a new editor window with the business process shown visually (using the camunda bpmn editor in preview mode):
+
+![Quick View Process](assets/processQuickViewDisplay.png)
+
+The process view is not editable (this will come soon!).
+
+On top-right of the preview window is the "Save Process SVG" button which you can click to store the SVG representation
+of the process:
+
+![Quick View Process](assets/processQuickViewSavesvg.png)
+
+This is useful as then it can be viewed in the process debugging section of the extension.
+
+Clicking on this button will create a new file or update an existing one. The naming of the generated svg file
+is **process-id**-svg.svg which conforms to what the jBPM execution server expects so it can find it given the
+process id of the process definition.
 
 ## Building from source
 

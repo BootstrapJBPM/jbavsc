@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.0 – 2018-02-11
+
+-   Added process quick preview feature (see readme)
+-   Added saving process SVG from preview (see readme)
+-   Updated README
+
+# Changelog
+
 ## 0.7.0 – 2018-02-06
 
 -   Added new community version 7.17.0.Final for generation
