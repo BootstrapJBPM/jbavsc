@@ -1,6 +1,6 @@
 "use strict";
 
-import { commands, ExtensionContext, Uri } from "vscode";
+import { window, commands, ExtensionContext, Uri } from "vscode";
 import { startGen } from "./lib/generate/startGen";
 import { startDebugger } from "./lib/debug/debugMonitor";
 import { startPreview } from "./lib/preview/startPreview";

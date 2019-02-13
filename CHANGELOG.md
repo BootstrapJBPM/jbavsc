@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.0 – 2018-02-13
+
+-   Added online check for app generation
+-   Updated README
+
 ## 0.8.0 – 2018-02-11
 
 -   Added process quick preview feature (see readme)

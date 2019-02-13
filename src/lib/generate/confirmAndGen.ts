@@ -20,9 +20,6 @@ export function confirmAndGen(
 					} else {
 						genFunction(context);
 					}
-					window.showInformationMessage(
-						"Successfully generated your jBPM Business Application"
-					);
 				} catch (e) {
 					window.showInformationMessage(
 						`Error generating your jBPM Business Application: ${e}`

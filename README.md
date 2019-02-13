@@ -55,6 +55,9 @@ This section explains in detail how to use this extension and its commands.
 
 ### Generate new app
 
+**Note:** you must be **online** to generate the business app. If you are not online the
+extension will try to generate the app and will notify you that it can't do that.
+
 To generate a new jBPM Business application open VS Code in a workspace (directory) where you would like to generate it, for example:
 
 ```

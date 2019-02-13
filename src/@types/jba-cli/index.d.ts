@@ -4,6 +4,9 @@ declare module "jba-cli" {
 		quickinstall: any,
 		site: any,
 		dounzip: any,
-		path: any
-	): void;
+		path: any,
+		dothrow: boolean
+	): Promise<boolean>;
+
+	export function urlExists(url: string, cb: Function): void;
 }

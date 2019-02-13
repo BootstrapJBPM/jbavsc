@@ -2,6 +2,8 @@ import { ExtensionContext, window, workspace } from "vscode";
 import State from "./configState";
 import * as jba from "jba-cli";
 
+export const defaultUrl = "https://start.jbpm.org/gen";
+
 export async function runDefaultApp(context: ExtensionContext) {
 	let workspaceRoot = workspace.rootPath;
 	if (!workspaceRoot) {
@@ -10,20 +12,26 @@ export async function runDefaultApp(context: ExtensionContext) {
 		);
 		return;
 	}
-	return await new Promise<string>((resolve, reject) => {
-		try {
-			jba.getAndGenerate(
-				{},
-				true,
-				"https://start.jbpm.org/gen",
-				true,
-				workspaceRoot
-			);
-			resolve("done");
-		} catch (e) {
-			reject(e);
-		}
-	});
+
+	try {
+		jba.urlExists(defaultUrl, (error: string, exists: boolean) => {
+			if (!exists) {
+				window.showErrorMessage(
+					`Unable to contact ${defaultUrl}. Make sure you are online!`
+				);
+				return false;
+			} else {
+				window.showInformationMessage(
+					"Successfully generated your jBPM Business Application"
+				);
+			}
+		});
+
+		jba.getAndGenerate({}, true, defaultUrl, true, workspaceRoot, false);
+		return true;
+	} catch (e) {
+		return false;
+	}
 }
 
 export async function runConfiguredApp(
@@ -74,18 +82,32 @@ export async function runConfiguredApp(
 		return;
 	}
 
-	return await new Promise<string>((resolve, reject) => {
-		try {
-			jba.getAndGenerate(
-				appDetails,
-				true,
-				"https://start.jbpm.org/gen",
-				true,
-				workspaceRoot
-			);
-			resolve("done");
-		} catch (e) {
-			reject(e);
-		}
-	});
+	try {
+		jba.urlExists(defaultUrl, (error: string, exists: boolean) => {
+			if (!exists) {
+				window.showErrorMessage(
+					`Unable to contact ${defaultUrl}. Make sure you are online!`
+				);
+			} else {
+				window.showInformationMessage(
+					"Successfully generated your jBPM Business Application"
+				);
+			}
+		});
+
+		jba.getAndGenerate(
+			appDetails,
+			true,
+			defaultUrl,
+			true,
+			workspaceRoot,
+			false
+		);
+		return true;
+	} catch (e) {
+		window.showErrorMessage(
+			`Unable to contact ${defaultUrl}. Make sure you are online!`
+		);
+		return false;
+	}
 }
