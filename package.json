@@ -33,8 +33,7 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [
-			{
+		"commands": [{
 				"command": "jbpm.jbavsc",
 				"title": "Generate jBPM Business Application"
 			},
@@ -48,13 +47,11 @@
 			}
 		],
 		"menus": {
-			"explorer/context": [
-				{
-					"when": "resourceFilename =~ /.*\\.(bpmn|bpmn2)/",
-					"command": "jbpm.jbavsc.processquickview",
-					"group": "jbavscgroup"
-				}
-			]
+			"explorer/context": [{
+				"when": "resourceFilename =~ /.*\\.(bpmn|bpmn2)/",
+				"command": "jbpm.jbavsc.processquickview",
+				"group": "jbavscgroup"
+			}]
 		}
 	},
 	"scripts": {
