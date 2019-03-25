@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.12.0 – 2018-03-13
+
+-   added new community version 7.19.0.Final for generation
+-   added new snapshot community version 7.20.0-SNAPSHOT for generation
+
 ## 0.11.0 – 2018-03-13
 
 -   added new community version 7.18.0.Final for generation
